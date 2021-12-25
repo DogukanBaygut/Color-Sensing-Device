@@ -3,6 +3,7 @@
  App Name : Color Sensor Device
  Author: Dogukan
  Version: v1
+ Last Update: 25.12.2021
  */
 
 #include <LiquidCrystal.h> //LCD kütüphanesini kodumuza dahil ediyoruz
@@ -77,12 +78,13 @@ void loop() {
   lcd.clear(); //Ekranı temizle
   delay(150); //150 milisaniye bekle
 
-  lcd.setCursor(1, 0); //İmleci 1. sütuna al
-  lcd.print("Algilanan Renk");
-  lcd.setCursor(2, 1); //İmleci 2. satır 2. sütuna al
+  
   //Kalibrasyon bölümünde elde ettiğimiz değerleri bu kısımda kullanacağız
   if (K < 70 && M < 70 && Y < 70) //Eğer tüm renklerin yoğunluğu yüksekse: Beyaz
   {
+    lcd.setCursor(1, 0); //İmleci 1. sütuna al
+    lcd.print("Algilanan Renk");
+    lcd.setCursor(2, 1); //İmleci 2. satır 2. sütuna al
     Serial.print("Renk = Beyaz   ");
     lcd.print("Beyaz"); //Ekrana Beyaz yazdırır.
     digitalWrite(buzzer,HIGH); //Buzzerı aç.
@@ -93,7 +95,10 @@ void loop() {
   } else if (K < 100 && Y < M && abs(K - Y) < 20)
   
   //Kırmızı yoğunluğu yüksek ve yeşille arasındaki değer 20'den azsa: Sarı
-  {
+  { 
+    lcd.setCursor(1, 0); //İmleci 1. sütuna al
+    lcd.print("Algilanan Renk");
+    lcd.setCursor(2, 1); //İmleci 2. satır 2. sütuna al
     Serial.print("Renk = Sarı   ");
     lcd.print("Sari");
     digitalWrite(buzzer,HIGH); //Buzzerı aç.
@@ -104,6 +109,9 @@ void loop() {
   } else if (K < 100 && M < Y && abs(M - K) < 20)
   //Kırmızı yoğunluğu yüksek ve mavi ile arasındaki değer 20'den azsa: Magenta
   {
+    lcd.setCursor(1, 0); //İmleci 1. sütuna al
+    lcd.print("Algilanan Renk");
+    lcd.setCursor(2, 1); //İmleci 2. satır 2. sütuna al
     Serial.print("Renk = Magenta   ");
     lcd.print("Magenta"); //Ekrana Magenta yazdırır.
     digitalWrite(buzzer,HIGH); //Buzzerı aç.
@@ -114,6 +122,9 @@ void loop() {
   } else if (Y < 130 && Y < M && Y < K)
   //Yeşil yoğunluğu belli bir seviyenin üstünde ve kırmızı-maviden daha yoğunsa: Yeşil
   {
+    lcd.setCursor(1, 0); //İmleci 1. sütuna al
+    lcd.print("Algilanan Renk");
+    lcd.setCursor(2, 1); //İmleci 2. satır 2. sütuna al
     Serial.print("Renk = Yeşil   ");
     lcd.print("Yesil");  // Ekrana Yeşil yazdırır.
     digitalWrite(buzzer,HIGH); //Buzzerı aç.
@@ -124,6 +135,9 @@ void loop() {
   } else if (M < 100 && M < Y && M < K)
   //Mavi yoğunluğu belli bir seviyenin üstünde ve yeşil-kırmızıdan daha yoğunsa: Mavi
   {
+    lcd.setCursor(1, 0); //İmleci 1. sütuna al
+    lcd.print("Algilanan Renk");
+    lcd.setCursor(2, 1); //İmleci 2. satır 2. sütuna al
     Serial.print("Renk = Mavi   ");
     lcd.print("Mavi"); // Ekrana Mavi yazdırır.
     digitalWrite(buzzer,HIGH); //Buzzerı aç.
@@ -134,6 +148,9 @@ void loop() {
   } else if (K < 100 && K < Y && K < M)
   //Kırmızı yoğunluğu belli bir seviyenin üstünde ve yeşil-maviden daha yoğunsa: Kırmızı
   {
+    lcd.setCursor(1, 0); //İmleci 1. sütuna al
+    lcd.print("Algilanan Renk");
+    lcd.setCursor(2, 1); //İmleci 2. satır 2. sütuna al
     Serial.print("Renk = Kırmızı   ");
     lcd.print("Kirmizi"); // Ekrana Kirmizi yazdırır.
     digitalWrite(buzzer,HIGH); //Buzzerı aç.
@@ -142,8 +159,15 @@ void loop() {
     digitalWrite(g,LOW); // Yeşil Ledi kapa.
     digitalWrite(buzzer,LOW); // Buzzerı Kapa.
   } else {
+    
+    lcd.setCursor(1,0); //İmleci 1. sütuna al
+    lcd.print("ERROR !");
+    lcd.setCursor(2, 1); //İmleci 2. satır 2. sütuna al
     Serial.print("Renk algılanamadı   "); //Belirlediğimiz kıstaslara uymayan diğer renkler
     lcd.print("Tekrar deneyin"); // Ekrana Tekrar deneyin yazdırır.
+    
+  
+    
     digitalWrite(buzzer,HIGH);  //Buzzerı aç.
     digitalWrite(r,HIGH); //Kırmızı Ledi aç.
     delay(2000); // 2 saniye delay koy.
