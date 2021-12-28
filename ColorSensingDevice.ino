@@ -3,7 +3,6 @@
  App Name : Color Sensor Device
  Author: Dogukan
  Version: v1
- Last Update: 25.12.2021
  */
 
 #include <LiquidCrystal.h> //LCD kütüphanesini kodumuza dahil ediyoruz
@@ -87,11 +86,11 @@ void loop() {
     lcd.setCursor(2, 1); //İmleci 2. satır 2. sütuna al
     Serial.print("Renk = Beyaz   ");
     lcd.print("Beyaz"); //Ekrana Beyaz yazdırır.
-    digitalWrite(buzzer,HIGH); //Buzzerı aç.
+    tone(buzzer,260); //Buzzerı aç.
     digitalWrite(g,HIGH);    // Yeşil Ledi aç.
     delay(100);             // 0.1 saniye delay koy.
     digitalWrite(g,LOW);   // Yeşil Ledi kapa.
-    digitalWrite(buzzer,LOW); // Buzzerı Kapa.
+    noTone(buzzer); // Buzzerı Kapa.
   } else if (K < 100 && Y < M && abs(K - Y) < 20)
   
   //Kırmızı yoğunluğu yüksek ve yeşille arasındaki değer 20'den azsa: Sarı
@@ -101,11 +100,11 @@ void loop() {
     lcd.setCursor(2, 1); //İmleci 2. satır 2. sütuna al
     Serial.print("Renk = Sarı   ");
     lcd.print("Sari");
-    digitalWrite(buzzer,HIGH); //Buzzerı aç.
+    tone(buzzer,260); //Buzzerı aç.
     digitalWrite(g,HIGH);  // Yeşil Ledi aç.
     delay(100);            // 0.1 saniye delay koy.
     digitalWrite(g,LOW);   // Yeşil Ledi kapa.
-    digitalWrite(buzzer,LOW); // Buzzerı Kapa.
+    noTone(buzzer); // Buzzerı Kapa.
   } else if (K < 100 && M < Y && abs(M - K) < 20)
   //Kırmızı yoğunluğu yüksek ve mavi ile arasındaki değer 20'den azsa: Magenta
   {
@@ -114,11 +113,11 @@ void loop() {
     lcd.setCursor(2, 1); //İmleci 2. satır 2. sütuna al
     Serial.print("Renk = Magenta   ");
     lcd.print("Magenta"); //Ekrana Magenta yazdırır.
-    digitalWrite(buzzer,HIGH); //Buzzerı aç.
+    tone(buzzer,260); //Buzzerı aç.
     digitalWrite(g,HIGH);  // Yeşil Ledi aç.
     delay(100);          // 0.1 saniye delay koy.
     digitalWrite(g,LOW);  // Yeşil Ledi kapa.
-    digitalWrite(buzzer,LOW); // Buzzerı Kapa.
+    noTone(buzzer); // Buzzerı Kapa.
   } else if (Y < 130 && Y < M && Y < K)
   //Yeşil yoğunluğu belli bir seviyenin üstünde ve kırmızı-maviden daha yoğunsa: Yeşil
   {
@@ -128,10 +127,11 @@ void loop() {
     Serial.print("Renk = Yeşil   ");
     lcd.print("Yesil");  // Ekrana Yeşil yazdırır.
     digitalWrite(buzzer,HIGH); //Buzzerı aç.
-    digitalWrite(g,HIGH);  // Yeşil Ledi aç.
+    tone(buzzer,260);  // Yeşil Ledi aç.
+    digitalWrite(g,HIGH);  // Yeşil Ledi kapa.
     delay(100);          // 0.1 saniye delay koy.
     digitalWrite(g,LOW);  // Yeşil Ledi kapa.
-    digitalWrite(buzzer,LOW); // Buzzerı Kapa.
+    noTone(buzzer); // Buzzerı Kapa.
   } else if (M < 100 && M < Y && M < K)
   //Mavi yoğunluğu belli bir seviyenin üstünde ve yeşil-kırmızıdan daha yoğunsa: Mavi
   {
@@ -141,10 +141,11 @@ void loop() {
     Serial.print("Renk = Mavi   ");
     lcd.print("Mavi"); // Ekrana Mavi yazdırır.
     digitalWrite(buzzer,HIGH); //Buzzerı aç.
-    digitalWrite(g,HIGH); // Yeşil Ledi aç.
+    tone(buzzer,260); // Yeşil Ledi aç.
+    digitalWrite(g,HIGH);
     delay(100);          // 0.1 saniye delay koy.
     digitalWrite(g,LOW); // Yeşil Ledi kapa.
-    digitalWrite(buzzer,LOW); // Buzzerı Kapa.
+    noTone(buzzer); // Buzzerı Kapa.
   } else if (K < 100 && K < Y && K < M)
   //Kırmızı yoğunluğu belli bir seviyenin üstünde ve yeşil-maviden daha yoğunsa: Kırmızı
   {
@@ -153,11 +154,11 @@ void loop() {
     lcd.setCursor(2, 1); //İmleci 2. satır 2. sütuna al
     Serial.print("Renk = Kırmızı   ");
     lcd.print("Kirmizi"); // Ekrana Kirmizi yazdırır.
-    digitalWrite(buzzer,HIGH); //Buzzerı aç.
+    tone(buzzer,260); //Buzzerı aç.
     digitalWrite(g,HIGH); // Yeşil Ledi aç.
     delay(100);         // 0.1 saniye delay koy.
     digitalWrite(g,LOW); // Yeşil Ledi kapa.
-    digitalWrite(buzzer,LOW); // Buzzerı Kapa.
+    noTone(buzzer); // Buzzerı Kapa.
   } else {
     
     lcd.setCursor(1,0); //İmleci 1. sütuna al
@@ -168,17 +169,17 @@ void loop() {
     
   
     
-    digitalWrite(buzzer,HIGH);  //Buzzerı aç.
+    tone(buzzer,260);  //Buzzerı aç.
     digitalWrite(r,HIGH); //Kırmızı Ledi aç.
-    delay(2000); // 2 saniye delay koy.
+    delay(500); // 0.5 saniye delay koy.
     digitalWrite(r,LOW); // Kırmızı Ledi kapa.
-    digitalWrite(buzzer,LOW); // Buzzerı Kapa.
-    delay(1000); // 1 saniye delay koy.
-    digitalWrite(buzzer,HIGH);  //Buzzerı aç.
+    noTone(buzzer); // Buzzerı Kapa.
+    delay(500); // 0.5 saniye delay koy.
+    tone(buzzer,260);  //Buzzerı aç.
     digitalWrite(r,HIGH); //Kırmızı Ledi aç.
-    delay(2000); // 2 saniye delay koy.
+    delay(500); // 0.5 saniye delay koy.
     digitalWrite(r,LOW); // Kırmızı Ledi kapa.
-    digitalWrite(buzzer,LOW); // Buzzerı Kapa.
+    noTone(buzzer); // Buzzerı Kapa.
     
   }
 
